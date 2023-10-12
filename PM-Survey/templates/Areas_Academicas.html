@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='/css/Areas.css') }}"
+/>
+{% endblock %} {% block b %}
+<div class="cabecera">Áreas Académicas ! &#128216;</div>
+<div class="Areas_Academicas">
+  <h2>datos de las áreas académicas</h2>
+  <div class="container">
+    <ul>
+      <li class="item-lista">Matemáticas: {{ data.Matematicas }}</li>
+      <li class="item-lista">Física: {{ data.Fisica }}</li>
+      <li class="item-lista">Inglés: {{ data.Ingles }}</li>
+      <li class="item-lista">Ética: {{ data.Etica }}</li>
+      <li class="item-lista">Filosofía: {{ data.Filosofia }}</li>
+    </ul>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const items = document.querySelectorAll(".item-lista");
+
+      items.forEach(function (item) {
+        item.addEventListener("mouseenter", function () {
+          const matches = item.textContent.match(/[\d.]+/); // Extrae valores numéricos (con decimales)
+          if (matches && matches.length > 0) {
+            const valor = parseFloat(matches[0]);
+            if (!isNaN(valor)) {
+              if (valor > 3) {
+                item.style.color = "white";
+                item.style.backgroundColor = "lightgreen";
+              } else {
+                item.style.color = "white";
+                item.style.backgroundColor = "lightcoral";
+              }
+            }
+          }
+        });
+
+        item.addEventListener("mouseleave", function () {
+          item.style.color = ""; // Restaura el color original
+          item.style.backgroundColor = "";
+        });
+      });
+    });
+  </script>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "admin.html" %}
+
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='/css/Docente.css') }}"
+/>
+{% endblock %}
+
+{% block b %}
+<div class="cabecera">HOLA {{ data.Nombre }} ! &#x1F680;</div>
+<div class="informacion-usuario">
+  <h2>Información del usuario</h2>
+  <p>Nombre: {{ data.Nombre }}</p>
+  <p>Apellido: {{ data.Apellido }}</p>
+  <p>Sección: {{ data.Grupo }}</p>
+  <p>Correo: {{ data.Email }}</p>
+</div>
+{% endblock %}

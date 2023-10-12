@@ -1,0 +1,53 @@
+{% extends "admin.html" %}
+
+{% block css %}
+<link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='/css/Analisis.css') }}"
+/>
+{% endblock %}
+
+{% block b %}
+<body>
+    <div class="cabecera">Análisis Escolar <span>&#128202;</span></div>
+
+    <div class="informacion-usuario">
+        <p>Análisis General</p>
+        <div class="contenedor">
+            <div class="notas">
+                <label for="options">Selecciona una nota:</label>
+                <select id="options">
+                    <option value="">Selecciona una opción</option>
+                    <option value="grafica1">Nota 1</option>
+                    <option value="grafica2">Nota 2</option>
+                    <option value="grafica3">Nota 3</option>
+                </select>
+            </div>
+            <div class="graficas">
+                <div class="grafica" id="grafica1" style="display: none;">    {{ grafica1 | safe }}</div>
+                <div class="grafica" id="grafica2" style="display: none;">    {{ grafica2 | safe }}</div>
+                <div class="grafica" id="grafica3" style="display: none;">    {{ grafica3 | safe }}</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var select = document.getElementById("options");
+
+            select.addEventListener("change", function () {
+                var graficas = document.querySelectorAll(".grafica");
+                graficas.forEach(function (grafica) {
+                    grafica.style.display = "none";
+                });
+
+                var seleccion = select.options[select.selectedIndex].value;
+                var grafica = document.getElementById(seleccion);
+                if (grafica) {
+                    grafica.style.display = "block";
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

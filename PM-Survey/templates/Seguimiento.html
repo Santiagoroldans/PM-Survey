@@ -1,0 +1,34 @@
+{% extends "admin.html" %}
+
+{% block css %}
+<link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='/css/Docente.css') }}"
+/>
+{% endblock %}
+
+{% block b %}
+
+<div class="Estudiantes">
+    <h2>Estudiantes</h2>
+    <div class="container">
+        <h1>Notas de Estudiantes</h1>
+        <table border="1">
+            <tr>
+                <th>Nombre del Estudiante</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Nota 3</th>
+            </tr>
+            {% for nombre, notas in notas.items() %}
+            <tr>
+                <td>{{ nombre }}</td>
+                {% for nota in notas %}
+                <td>{{ nota }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

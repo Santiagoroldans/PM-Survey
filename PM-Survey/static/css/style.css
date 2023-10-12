@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+
+}
+
+.root{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    background: aliceblue;   
+    background-image: url('https://images.unsplash.com/photo-1636819488524-1f019c4e1c44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.box {
+  position: relative;
+  margin-right: 210px;
+  margin-left: 210px;
+  width: 320px;
+  height: 420px;
+  background: transparent;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+.form {
+  position: absolute;
+  inset: 2px;
+  border: deepskyblue 2px solid;
+  border-radius: 10px;
+  z-index: 10;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  background-color: aliceblue;
+}
+
+.form h2 {
+  color: #1c1c1c;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+}
+
+.inputBox {
+  position: relative;
+  width: 100%;
+  margin-top: 35px;
+  backdrop-filter: blur(10px);
+}
+
+.inputBox input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #1c1c1c;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
+
+.inputBox span {
+  position: absolute;
+  left: 0;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: #1c1c1c;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  backdrop-filter: blur(10px);
+}
+
+.inputBox input:focus ~ span,
+.inputBox input:valid ~ span {
+  color: lightseagreen;
+  transform: translateY(-34px);
+  font-size: 0.75em;
+}
+
+.inputBox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: lightblue;
+  border-radius: 4px;
+  pointer-events: none;
+  transition: 0.5s;
+  z-index: 9;
+}
+
+.inputBox input:focus ~ i,
+.inputBox input:valid ~ i {
+  height: 44px;
+}
+
+input[type="submit"] {
+  border: none;
+  outline: none;
+  background: lightskyblue;
+  padding: 12px 25px;
+  width: 100px;
+  margin-top: 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.6;
+}
+
+input[type="submit"]:active {
+  opacity: 0.7;
+}

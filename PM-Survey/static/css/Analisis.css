@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+}
+
+.a {
+    width: 12%;
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.menu {
+    background-color: lightskyblue;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: -155px;
+    width: 150px;
+    height: 100%;
+    overflow-y: auto;
+    transition: left 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: unset;
+}
+
+.menu a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.desplegable {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.desplegable span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: green;
+    margin-top: 6px;
+    transform-origin: 0px 100%;
+    transition: all 0.5s linear;
+    border: #fff;
+}
+
+.activeline1 {
+    transform: rotate(45deg) translate(-2px, 1px);
+    background: #fff;
+}
+
+.activeline2 {
+    opacity: 0;
+    margin-left: -30px;
+    background: #fff;
+}
+
+.activeline3 {
+    transform: rotate(-45deg) translate(-4px, 2px);
+}
+
+
+.b {
+    width: 78%;
+    height: 97vh;
+    margin: 10px 2px 2px 2px;
+    border: #1c1c1c solid 1px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.cabecera {
+    width: 100%;
+    height: 20%;
+    text-align: left;
+    padding: 25px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    border-bottom: #1c1c1c solid 1px;
+    text-transform: uppercase;
+}
+
+.informacion-usuario {
+    width: 100%;
+    height: 80%;
+    font-size: x-large;
+    font-family: "Times New Roman", Times, serif;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: space-around;
+}
+
+.informacion-usuario p {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+}
+
+.label {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+
+}
+
+.contenedor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.prom {
+    width: 40%;
+    height: 90%;
+    padding: 5px;
+    margin-left: 5px;
+    text-transform: uppercase;
+    font-size: large;
+}
+
+.promedio {
+
+    width: 97%;
+    height: 50%;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: #1c1c1c solid 2px;
+    transition: background-color 0.3s;
+}
+
+.promedio.verde {
+    background-color: lightgreen;
+    color: white;
+}
+
+.promedio.rojo {
+    background-color: lightcoral;
+    color: white;
+}
+
+#mensaje {
+    color: green;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#mensajep {
+    color: orangered;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.grafica {
+    width: 100%;
+    height: 95%;
+    margin-right: 20px;
+}
+
+
+.c {
+    width: 10%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -275px;
+}
+
+.c img {
+    background-color: transparent;
+    border-radius: 50%;
+    border: lightgreen solid 2px;
+    object-fit: cover;
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+}
+
+a {
+    text-decoration: none; /* Elimina la subrayado predeterminado del enlace */
+}
+
+/* Estilos para el botón */
+#logout-button {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Estilos para el botón al pasar el mouse */
+#logout-button:hover {
+    background-color: #2980b9;
+    border: #1c1c1c solid 2px;
+}
+
+#logout-button {
+    display: none;
+}
+
+/* Estilos para el select */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 200px; /* Ajusta el ancho según tus necesidades */
+    cursor: pointer;
+    appearance: none; /* Oculta la flecha predeterminada en algunos navegadores */
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilo para las opciones */
+select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilos cuando el select está enfocado */
+select:focus {
+    outline: none;
+    border-color: #007bff; /* Cambia el color del borde cuando el select está enfocado */
+}
+
+/* Estilo para las opciones cuando el cursor pasa sobre ellas (hover) */
+select option:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+

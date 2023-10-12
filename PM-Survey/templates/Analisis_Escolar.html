@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block css %}
+<link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='/css/Analisis.css') }}"
+/>
+
+{% endblock %} {% block b %}
+<div class="cabecera">Análisis Escolar ! &#128202;</div>
+<div class="informacion-usuario">
+    <p>Análisis General</p>
+    <div class="contenedor">
+        <div class="prom">
+            <h2>Tu promedio es: </h2>
+            <div class="promedio" id="promedio">{{ promedio }}</div>
+            <div id="mensaje" style="display: none;">¡ Vas ganando &#128526; !</div>
+            <div id="mensajep" style="display: none;"> Vas Perdiendo tonto &#128514;  </div>
+        </div>
+        <div class="grafica"> {{ grafica | safe }}</div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#promedio').hover(function () {
+            var valor = parseFloat($(this).text());
+            if (valor >= 3) {
+                $(this).addClass('verde');
+                $(this).removeClass('rojo');
+                $('#mensaje').show();
+            } else {
+                $(this).addClass('rojo');
+                $(this).removeClass('verde');
+                $('#mensajep').show()
+            }
+        }, function () {
+            $(this).removeClass('verde rojo');
+            $('#mensaje').hide()
+            $('#mensajep').hide()
+        });
+    });
+</script>
+
+{% endblock %}
