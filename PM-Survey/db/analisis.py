@@ -1,23 +1,17 @@
 import plotly.graph_objects as go
-import supabase
-from supabase import create_client
 from dotenv import load_dotenv
+from supabase import create_client
 
 load_dotenv()
-import pandas as pd
-import matplotlib.pyplot as plt
-import requests
-import json
 import plotly.express as px
 import pandas as pd
-import db as db
+
+url = "https://olumfqjodbfaoauorecf.supabase.co/"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
+supabase = create_client(url, key)
 
 
 def grafica(codigito):
-    url = "https://olumfqjodbfaoauorecf.supabase.co/"
-    key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
-    supabase = create_client(url, key)
-
     codigo = codigito
 
     response = supabase.table('notas_general').select('Matematicas', 'Fisica', 'Etica', 'Ingles', 'Filosofia',
@@ -41,13 +35,10 @@ def grafica(codigito):
 
 
 def prom(Codigo):
-    url = "https://olumfqjodbfaoauorecf.supabase.co/"
-    key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
-    supabase = create_client(url, key)
     codigo = Codigo
     response = supabase.table('notas_general').select('Matematicas', 'Fisica', 'Etica', 'Ingles', 'Filosofia',
-                                                           'Codigo').eq('Codigo',
-                                                                        codigo).execute()
+                                                      'Codigo').eq('Codigo',
+                                                                   codigo).execute()
     data_json = response.data[0]
 
     notas_del_estudiante = []
@@ -76,10 +67,6 @@ def prom(Codigo):
 
 
 def graficas_docente(Nota):
-    url = "https://olumfqjodbfaoauorecf.supabase.co/"
-    key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
-
-    supabase = create_client(url, key)
     notas_individuales = supabase.table('notas_individuales').select(Nota, 'Nombre').execute()
 
     x = list(notas_individuales)
@@ -98,3 +85,26 @@ def graficas_docente(Nota):
     fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3, marker_colors=['#44EB6D', '#EB4452'])])
 
     return fig.to_html()
+
+
+def grafica_admin():
+    response = supabase.table('notas_general').select('Matematicas', 'Fisica', 'Etica', 'Ingles', 'Filosofia').execute()
+    tabla = list(response)
+    u = tabla[0][1]
+
+    p = 0
+    g = len(u)
+    for i in u:
+        for j in i:
+            if i[j] < 3:
+                p += 1
+                break
+    g -= p
+    fig = go.Figure([go.Bar(x=['Ganando', 'Perdiendo'], y=[g, p], marker_color=['#44EB6D', '#EB4452'])])
+
+    return fig.to_html()
+
+
+def eliminar(id):
+    supabase.table('items').delete().eq('id', id).execute()
+    return True

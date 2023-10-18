@@ -1,13 +1,6 @@
-from supabase import create_client
-import os
 from dotenv import load_dotenv
-
+from supabase import create_client
 load_dotenv()
-import pandas as pd
-import matplotlib.pyplot as plt
-import requests
-import json
-import plotly.graph_objects as go
 
 url = "https://olumfqjodbfaoauorecf.supabase.co/"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
@@ -40,18 +33,20 @@ def user(Codigo):
 
 
 def notas_estudiantes():
-    url = "https://olumfqjodbfaoauorecf.supabase.co/"
-    key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdW1mcWpvZGJmYW9hdW9yZWNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTY5NTIzNTYsImV4cCI6MjAxMjUyODM1Nn0.G_RihDE6_I2yJ0u6KdILqV-OE5601kGDx7OFtU5gpsA"
-
-    supabase = create_client(url, key)
     response = supabase.table('notas_individuales').select('*').execute()
     data_json = response.data
     notas_estudiantes = {}
+    numero_notas = 0
 
     for estudiante in data_json:
         nombre_estudiante = estudiante['Nombre']
         notas_estudiante = [estudiante[key] for key in estudiante.keys() if key.startswith('Nota')]
         notas_estudiantes[nombre_estudiante] = notas_estudiante
+        numero = len(notas_estudiante)
+        if numero > numero_notas:
+            numero_notas = numero
 
-    return notas_estudiantes
 
+
+
+    return notas_estudiantes, numero_notas

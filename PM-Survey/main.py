@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
 from db import db, analisis
 
 app = Flask(__name__)
@@ -17,7 +17,10 @@ def login():
         if data == 'Error':
             return redirect(url_for('login'))
         else:
-            if len(request.form['Codigo']) == 6:
+            if request.form['Codigo'] == '00000' and request.form['Password'] == '12345600':
+                print('Login correcto')
+                return redirect(url_for('AnalisisAdmin'))
+            elif len(request.form['Codigo']) == 6:
                 if request.form['Codigo'] == str(data['Codigo']) and request.form['Password'] == str(data['Password']):
                     print('Login correcto')
                     return redirect(url_for('home'))
@@ -38,8 +41,15 @@ def login():
 @app.route('/Seguimiento')
 def Seguimiento():
     dato = data
-    notas_estudiantes = db.notas_estudiantes()
-    return render_template('Seguimiento.html', notas=notas_estudiantes, data=dato)
+    notas_estudiantes = db.notas_estudiantes()[0]
+    numero = db.notas_estudiantes()[1]
+    print(numero)
+    return render_template('Seguimiento.html', notas=notas_estudiantes, data=dato, numero=numero)
+
+@app.route('/Seguimiento/eliminar/{{ elemento.id }}')
+def eliminar_elemento(elemento_id):
+    hola = analisis.eliminar(elemento_id)
+    return redirect('/')
 
 
 @app.route('/Analisis')
@@ -75,6 +85,11 @@ def Analisis_Escolar():
     grafica = analisis.grafica(codigo)
     promedio = analisis.prom(codigo)
     return render_template('Analisis_Escolar.html', grafica=grafica, promedio=promedio)
+
+@app.route('/AnalisisAdmin')
+def AnalisisAdmin():
+    sis = analisis.grafica_admin()
+    return render_template('AnalisisAdmin.html', analisis=sis)
 
 
 @app.route('/ayuda')
